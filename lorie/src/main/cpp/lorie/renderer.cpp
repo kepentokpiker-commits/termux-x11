@@ -508,6 +508,14 @@ void Renderer::testCapabilities(int* legacy_drawing, int* gpu_present_disabled) 
             return vprintEglError("check eglMakeCurrent failed", __LINE__);
 
         // Intel's Mesa driver has a race that makes dma-buf cross-process write visibility
+    {
+        const char *gv = (const char *) glGetString(GL_VENDOR);
+        const char *gr = (const char *) glGetString(GL_RENDERER);
+        const char *gl = (const char *) glGetString(GL_VERSION);
+        const char *ee = eglQueryString(egl_display, EGL_EXTENSIONS);
+        log("Xlorie: GPU probe: vendor=%s renderer=%s version=%s\n", gv ? gv : "?", gr ? gr : "?", gl ? gl : "?");
+        log("Xlorie: EGL extensions: %s\n", ee ? ee : "?");
+    }
         // unreliable, so blacklist it outright.
         if (!*gpu_present_disabled) {
             const char *renderer = (const char *) glGetString(GL_RENDERER);

@@ -100,6 +100,7 @@ static jboolean start(JNIEnv *env, jobject self, jobjectArray args) {
 
     {
         cpu_set_t mask;
+        CPU_ZERO(&mask);
         long num_cpus = sysconf(_SC_NPROCESSORS_ONLN);
 
         for (int i = num_cpus/2; i < num_cpus; i++)
