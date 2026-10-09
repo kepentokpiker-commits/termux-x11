@@ -73,6 +73,12 @@ jobs:
           ./shell-loader/build/outputs/companion/termux-x11-*-all.deb
           ./shell-loader/build/outputs/companion/termux-x11-*-any.pkg.tar.xz
 
+    - name: Store loader apk
+      uses: actions/upload-artifact@v7
+      with:
+        name: termux-x11-loader
+        path: ./shell-loader/build/outputs/apk/debug/shell-loader-debug.apk
+
     - name: Store unstripped libraries with debug symbols
       uses: actions/upload-artifact@v7
       with:
