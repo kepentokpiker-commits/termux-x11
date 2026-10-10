@@ -1,12 +1,12 @@
 -keepattributes SourceFile,LineNumberTable
 
 # Keep classes/members referenced from JNI (FindClass/GetMethodID/RegisterNatives) + main entrypoint
--keep class com.termux.x11.LorieView {
+-keep class com.x11srv.LorieView {
     native <methods>;
     void resetIme();
 }
 
--keep class com.termux.x11.CmdEntryPoint {
+-keep class com.x11srv.CmdEntryPoint {
     public static void main(java.lang.String[]);
 }
 
@@ -20,7 +20,7 @@
 -dontwarn android.content.IIntentSender
 -dontwarn android.content.pm.IPackageManager
 
--keepclassmembers class com.termux.x11.** {
+-keepclassmembers class com.x11srv.** {
     void performReceive(android.content.Intent, int, java.lang.String, android.os.Bundle, boolean, boolean, int);
 }
 

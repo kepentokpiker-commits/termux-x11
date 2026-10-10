@@ -16,11 +16,11 @@ fi
 if [ "$(getprop ro.build.version.sdk)" -ge "34" ]; then
   unset LD_LIBRARY_PATH LD_PRELOAD
   export CLASSPATH=/data/data/@EMBEDDED_APPLICATION_ID@/files/usr/libexec/termux-x11/loader.apk
-  export TERMUX_X11_LOADER_OVERRIDE_CMDENTRYPOINT_CLASS=com.termux.x11.LoriePreferences\$Receiver
-  exec /system/bin/app_process -Xnoimage-dex2oat / com.termux.x11.Loader "$@"
+  export TERMUX_X11_LOADER_OVERRIDE_CMDENTRYPOINT_CLASS=com.x11srv.LoriePreferences\$Receiver
+  exec /system/bin/app_process -Xnoimage-dex2oat / com.x11srv.Loader "$@"
 fi
 
-COMMAND=("am" "broadcast" "-a" "com.termux.x11.CHANGE_PREFERENCE" "-p" "@APPLICATION_ID@")
+COMMAND=("am" "broadcast" "-a" "com.x11srv.CHANGE_PREFERENCE" "-p" "@APPLICATION_ID@")
 help() {
   echo "$0 [list] {key:value} [{key2:value2}]..."
   exit 1

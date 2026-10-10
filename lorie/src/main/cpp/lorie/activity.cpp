@@ -145,7 +145,7 @@ static jlong nativeInit(JNIEnv *env, jobject thiz) {
         CharBuffer.self = FindClassOrDie(env,  "java/nio/CharBuffer");
         CharBuffer.toString = FindMethodOrDie(env, CharBuffer.self, "toString", "()Ljava/lang/String;", JNI_FALSE);
 
-        MainActivity.self = FindClassOrDie(env,  "com/termux/x11/MainActivity");
+        MainActivity.self = FindClassOrDie(env,  "com/x11srv/MainActivity");
         MainActivity.clientConnectedStateChanged = FindMethodOrDie(env, MainActivity.self, "clientConnectedStateChanged", "()V", JNI_FALSE);
         MainActivity.resetIme = FindMethodOrDie(env, env->GetObjectClass(thiz), "resetIme", "()V", JNI_FALSE);
     }
@@ -163,7 +163,7 @@ LorieViewResources::LorieViewResources(JNIEnv *callerEnv, jobject view) {
     vm->AttachCurrentThread(&env, nullptr);
     thiz = env->NewGlobalRef(view);
 
-    jfieldID activityField = env->GetFieldID(env->GetObjectClass(view), "activity", "Lcom/termux/x11/MainActivity;");
+    jfieldID activityField = env->GetFieldID(env->GetObjectClass(view), "activity", "Lcom/x11srv/MainActivity;");
     jobject a = env->GetObjectField(view, activityField);
     if (a)
         activity = env->NewGlobalRef(a);
@@ -377,7 +377,7 @@ extern char* __progname;
 JNIEXPORT jint JNI_OnLoad(JavaVM *vm, __unused void *reserved) {
     JNIEnv* env;
 
-    if (!strcmp(__progname, "com.termux.x11")) {
+    if (!strcmp(__progname, "com.x11srv")) {
         // Redirects stderr to logcat.
         pthread_create([]{ static pthread_t t; return &t; }(), nullptr, +[](__unused void* cookie) -> void* {
             FILE *fp;
@@ -540,7 +540,7 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, __unused void *reserved) {
             }},
     };
     vm->AttachCurrentThread(&env, nullptr);
-    jclass cls = env->FindClass("com/termux/x11/LorieView");
+    jclass cls = env->FindClass("com/x11srv/LorieView");
     env->RegisterNatives(cls, methods, sizeof(methods)/sizeof(methods[0]));
 
     pthread_t freeformLookupThread;
@@ -566,7 +566,7 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, __unused void *reserved) {
                     env->CallVoidMethod(options, ActivityOptions.setLaunchWindowingMode, 5); // WINDOWING_MODE_FREEFORM
             }},
     };
-    env->RegisterNatives(env->FindClass("com/termux/x11/MainActivity"), mainActivityMethods, sizeof(mainActivityMethods)/sizeof(mainActivityMethods[0]));
+    env->RegisterNatives(env->FindClass("com/x11srv/MainActivity"), mainActivityMethods, sizeof(mainActivityMethods)/sizeof(mainActivityMethods[0]));
 
     registerCmdEntryPointNatives(env);
 

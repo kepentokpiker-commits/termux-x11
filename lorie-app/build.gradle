@@ -22,11 +22,11 @@ abstract class VerifySharedUidProcess extends DefaultTask {
 }
 
 android {
-    namespace 'com.termux.x11.app'
+    namespace 'com.x11srv.app'
     compileSdkVersion 34
     ndkVersion termuxX11NdkVersion
     defaultConfig {
-        applicationId "com.termux.x11"
+        applicationId "com.x11srv"
         minSdkVersion 24
         targetSdkVersion 34
         versionCode 15

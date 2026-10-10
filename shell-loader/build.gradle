@@ -6,7 +6,7 @@ if (gradle.startParameter.taskNames.isEmpty())
 else
     apply plugin: 'com.android.application'
 
-android.namespace 'com.termux.x11.shell_loader'
+android.namespace 'com.x11srv.shell_loader'
 android.defaultConfig.minSdkVersion 24
 android.compileSdkVersion 34
 android.buildTypes.debug.signingConfig null
@@ -27,14 +27,14 @@ def signingConfig = project(':lorie-app').android.signingConfigs.debug
 def keyStore = java.security.KeyStore.getInstance(java.security.KeyStore.getDefaultType())
 keyStore.load(new FileInputStream(signingConfig.storeFile), signingConfig.keyPassword.toCharArray())
 
-ext.targetApplicationId = "com.termux.x11"
+ext.targetApplicationId = "com.x11srv"
 ext.embeddedApplicationId = "com.termux"
 
 android.defaultConfig.buildConfigField "String", "APPLICATION_ID", "\"$targetApplicationId\""
 android.defaultConfig.buildConfigField "String", "EMBEDDED_APPLICATION_ID", "\"$embeddedApplicationId\""
 android.defaultConfig.buildConfigField "String", "logTag", "\"Termux:X11 loader\""
 android.defaultConfig.buildConfigField "int", "SIGNATURE", String.valueOf(Arrays.hashCode(keyStore.getCertificate(signingConfig.keyAlias).getEncoded()))
-android.defaultConfig.buildConfigField "String", "CLASS_ID", "\"com.termux.x11.CmdEntryPoint\""
+android.defaultConfig.buildConfigField "String", "CLASS_ID", "\"com.x11srv.CmdEntryPoint\""
 android.defaultConfig.buildConfigField "String", "packageNotInstalledErrorText",
         """\"Termux:X11 application is not found.\\n\" +
         \"You should choose latest release here: \\n https://github.com/termux/termux-x11/releases/tag/nightly\\n\" +

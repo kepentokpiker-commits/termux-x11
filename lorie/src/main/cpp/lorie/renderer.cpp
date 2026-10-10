@@ -310,7 +310,7 @@ void Renderer::init(JNIEnv* env, jobject view) {
 
     env->GetJavaVM(&jvm);
     thiz = env->NewGlobalRef(view);
-    jclass clazz = env->FindClass("com/termux/x11/LorieView");
+    jclass clazz = env->FindClass("com/x11srv/LorieView");
     lorieViewClass = (jclass) env->NewGlobalRef(clazz);
     setRendererViewportMethod = env->GetMethodID(lorieViewClass, "setRendererViewport", "(IIIIFFFF)V");
 

@@ -672,7 +672,7 @@ void registerCmdEntryPointNatives(JNIEnv *env) {
             {"reportFatalError", "(Ljava/lang/String;)V", (void *) &reportFatalError},
             {"connected", "()Z", (void *) +[]() -> jboolean { return conn_fd != -1; }}, // @CriticalNative
     };
-    jclass cls = env->FindClass("com/termux/x11/CmdEntryPoint");
+    jclass cls = env->FindClass("com/x11srv/CmdEntryPoint");
     env->RegisterNatives(cls, methods, sizeof(methods)/sizeof(methods[0]));
 }
 
