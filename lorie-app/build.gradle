@@ -51,6 +51,15 @@ android {
         keyPassword 'xrj45yWGLbsO7W0v'
     }
 
+    if (System.getenv("KEYSTORE_FILE")) {
+        signingConfigs.debug {
+            storeFile file(System.getenv("KEYSTORE_FILE"))
+            storePassword System.getenv("KEYSTORE_PASS")
+            keyAlias System.getenv("KEY_ALIAS")
+            keyPassword System.getenv("KEY_PASS")
+        }
+    }
+
     compileOptions.sourceCompatibility JavaVersion.VERSION_1_9
     compileOptions.targetCompatibility JavaVersion.VERSION_1_9
     buildTypes.debug {

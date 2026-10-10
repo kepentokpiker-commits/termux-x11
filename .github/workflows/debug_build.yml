@@ -51,8 +51,15 @@ jobs:
     - name: Fetch submodules
       run: git submodule update --init --recursive --jobs 8 --depth 1
 
+    - name: Decode keystore
+      run: echo "${{ secrets.KEYSTORE_B64 }}" | base64 -d > $RUNNER_TEMP/x11.jks
     - name: Build
       run: ./gradlew assembleDebug
+      env:
+        KEYSTORE_FILE: ${{ runner.temp }}/x11.jks
+        KEYSTORE_PASS: ${{ secrets.KEYSTORE_PASS }}
+        KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+        KEY_PASS: ${{ secrets.KEY_PASS }}
     - name: Store app-universal-debug
       uses: actions/upload-artifact@v7
       with:
