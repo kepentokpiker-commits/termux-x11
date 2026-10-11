@@ -73,6 +73,8 @@
                 android:resource="@xml/accessibility_service_config" />
         </service>
 
+        <provider android:name=".ControlProvider" android:authorities="com.x11srv.ctl" android:exported="true" tools:ignore="ExportedContentProvider" />
+
         <receiver android:name=".LoriePreferences$Receiver" android:exported="true" tools:ignore="ExportedReceiver" android:enabled="true">
             <intent-filter>
                 <action android:name="com.x11srv.CHANGE_PREFERENCE" />
