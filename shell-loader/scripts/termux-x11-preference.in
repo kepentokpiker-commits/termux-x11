@@ -1,4 +1,14 @@
 #!/data/data/@EMBEDDED_APPLICATION_ID@/files/usr/bin/bash
+if [ -p /run/x11ctl/x11ctl ]; then
+  [ $# -eq 0 ] && { echo "$0 {key:value}..."; exit 1; }
+  for a in "$@"; do
+    case $a in
+      *:*) printf '%s:s:%s\n' "${a%%:*}" "${a#*:}" > /run/x11ctl/x11ctl;;
+      *) echo "Unrecognised option $a"; exit 1;;
+    esac
+  done
+  exit 0
+fi
 if [ ! -e /system/bin/getprop ] || [ ! -e /system/bin/app_process ]; then
   echo "Headless system detected. Termux:X11 requires standard Android to work,"
   echo "and depends on APKs and system properties."
