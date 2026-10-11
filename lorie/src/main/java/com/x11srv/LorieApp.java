@@ -12,6 +12,7 @@ import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -69,6 +70,12 @@ public class LorieApp extends Application {
 
         builtInPrefs.get().registerOnSharedPreferenceChangeListener(preferencesChangedListener);
         secondaryPrefs.get().registerOnSharedPreferenceChangeListener(preferencesChangedListener);
+
+        IntentFilter prefFilter = new IntentFilter("com.x11srv.CHANGE_PREFERENCE");
+        if (SDK_INT >= VERSION_CODES.TIRAMISU)
+            registerReceiver(new LoriePreferences.Receiver(), prefFilter, Context.RECEIVER_EXPORTED);
+        else
+            registerReceiver(new LoriePreferences.Receiver(), prefFilter);
 
         String channelId = getResources().getString(R.string.lorie_app_name);
         if (SDK_INT >= VERSION_CODES.O) {
