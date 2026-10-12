@@ -61,3 +61,9 @@
 [submodule "app/src/main/cpp/bzip2"]
 	path = lorie/src/main/cpp/bzip2
 	url = https://gitlab.com/bzip2/bzip2.git
+[submodule "lorie/src/main/cpp/libxcb"]
+	path = lorie/src/main/cpp/libxcb
+	url = https://gitlab.freedesktop.org/xorg/lib/libxcb.git
+[submodule "lorie/src/main/cpp/xcbproto"]
+	path = lorie/src/main/cpp/xcbproto
+	url = https://gitlab.freedesktop.org/xorg/proto/xcbproto.git
